@@ -9,18 +9,27 @@
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 
+			// the renderer will automatically create a canvas element and retrieve
+			// the WebGL context
 			var renderer = new THREE.WebGLRenderer();
 			renderer.setSize(window.innerWidth, window.innerHeight);
 			document.body.appendChild(renderer.domElement);
 
+			// unlike WebGL's native positioning, the cartesian system in Three.js
+			// is more intuitive
 			var geometry = new THREE.CubeGeometry(1,1,1);
+			// colors in Three.js can be passed in hex, int (0-255) or floats (0-1)
 			var material = new THREE.MeshBasicMaterial({color: 0x00ff00});
 			var cube = new THREE.Mesh(geometry, material);
 			scene.add(cube);
 
-			camera.position.z = 5;
+			camera.position.z = 2;
 
+			// render loop
 			var render = function () {
+				// requestAnimationFrame is similar to setInterval, but intelligently
+				// pauses when users navigate switch active tabs
+				// it will call the render function 60 times per second
 				requestAnimationFrame(render);
 
 				cube.rotation.x += 0.05;
@@ -30,6 +39,7 @@
 			};
 
 			render();
+
 		</script>
 	</body>
 </html>
